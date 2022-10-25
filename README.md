@@ -2,9 +2,20 @@
 
 NuttX 学习和源码分析笔记
 
+# 使用指南
+
+```
+# 编译
+./nx.sh sim:minibasic
+
+# 运行 sim
+./bin/nuttx
+```
+
 ## commit specification
 
 ### commit format
+
 ```
 <type> (<scope>): <subject>
 <BLANK LINE>
