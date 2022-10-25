@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "sim",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/nuttx/nuttx",
+            "cwd": "${workspaceFolder}/bin",
+            "stopAtEntry": false,
+            "MIMode": "gdb",
+        }
+    ]
+}
