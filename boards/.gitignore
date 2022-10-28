@@ -1,0 +1,8 @@
+*.o
+*.a
+
+etctmp
+
+.depend
+etctmp.c
+Make.dep
