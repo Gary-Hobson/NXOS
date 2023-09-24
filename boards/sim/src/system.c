@@ -22,26 +22,19 @@
  * Included Files
  ****************************************************************************/
 
-#include <syslog.h>
-
 #include <nuttx/board.h>
-
-#include "up_internal.h"
-
-
 
 void board_early_initialize(void)
 {
-  return ;
+  return;
 }
 
 void board_late_initialize(void)
 {
-  return ;
+  return;
 }
 
 int board_app_initialize(uintptr_t arg)
 {
   return 0;
 }
-
