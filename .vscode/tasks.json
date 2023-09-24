@@ -6,9 +6,14 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "./nx.sh",
+            "detail": "编译 NuttX",
+            "command": "make -j",
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}/nuttx"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
             }
         }
     ]

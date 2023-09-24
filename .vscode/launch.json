@@ -2,13 +2,42 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "sim",
+            "name": "SIM 调试",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/nuttx/nuttx",
-            "cwd": "${workspaceFolder}/bin",
+            "cwd": "${workspaceFolder}/nuttx",
             "stopAtEntry": false,
             "MIMode": "gdb",
+        },
+        {
+            "name": "ARM 调试",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/nuttx/nuttx",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "arm-none-eabi-gdb",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "text": "file ${workspaceFolder}/nuttx/nuttx",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "连接GDB Server",
+                    "text": "target remote 192.168.31.33:2331",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "monitor reset",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "monitor halt",
+                    "ignoreFailures": false
+                }
+            ]
         }
     ]
 }
