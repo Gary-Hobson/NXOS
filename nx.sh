@@ -1,117 +1,71 @@
-#!/usr/bin/bash
-ROOTDIR=$(dirname $(readlink -f ${0}))
+#!/usr/bin/env bash
+# nx.sh
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
+ROOTDIR=$(realpath $(dirname $(readlink -f ${0})))
 NUTTXDIR=${ROOTDIR}/nuttx
-APPSDIR=${ROOTDIR}/apps
 TOOLSDIR=${NUTTXDIR}/tools
-config=${ROOTDIR}/build.ini
-source ${config}
 
-# 保存编译参数和配置
-function env_setup()
+BEAR="bear --append "
+
+function build_board()
 {
-  # 编译次数
-  if [ ! ${compile_count} ]; then
-    compile_count=1
-  else
-    compile_count=`expr ${compile_count} + 1`
-  fi
-  sed 's/compile_count.*//g' ${config} -i
-  echo "compile_count=${compile_count}" >> ${config}
+  echo -e "Build command line:"
+  echo -e "  ${TOOLSDIR}/configure.sh -e $1"
+  echo -e "  make -C ${NUTTXDIR} ${@:2}"
+  echo -e "  make -C ${NUTTXDIR} savedefconfig"
 
-  # 编译时间
-  compile_time=$(date "+%Y-%m-%d %H:%M:%S")
-  sed 's/compile_time.*//g' ${config} -i
-  echo "compile_time=\"${compile_time}\"" >> ${config}
-  sed '/^$/d' ${config} -i
-
-  # 编译使用线程数
-  if [ ! ${thread} ]; then
-    thread=$(expr $(nproc --all) - 2)
-    echo "thread=${thread}" >> ${config}
-  fi
-
-  # 开启编译详细信息
-  if [ ! ${VERBOSE} ]; then
-    VERBOSE="V=1"
-    echo "VERBOSE=\"${VERBOSE}\"" >> ${config}
-  fi
-
-  # 生成 compile_commands.json
-  if [ ! -z "$(type bear)" ] && [ ! ${bear_cmd} ];then
-    bear_cmd="bear -a -o .vscode/compile_commands.json"
-    echo "bear_cmd=\"${bear_cmd}\"" >> ${config}
-  fi
-
-  # 记录编译配置
-  if [ ! ${board_config} ];then
-    echo "board_config=\"${1}\"" >> ${config}
-    board_config=$1
-  else
-    if [ "${board_config}" != "$1" ] && [ $1 ]; then
-    echo "board_config=\"${1}\""
-      echo "board_config=\"${1}\"" > ${config}
-      board_config=$1
+  if ! ${TOOLSDIR}/configure.sh $1; then
+    make -C ${NUTTXDIR} distclean -j
+    rm $ROOTDIR/compile_commands.json
+    if ! ${TOOLSDIR}/configure.sh $1; then
+      echo "Error: ############# config ${1} fail ##############"
+      exit 1
     fi
   fi
 
-  if [ ! ${config_dir} ];then
-    if [ ! -d $board_config ]; then
-      config_dir=$(ls -d ${ROOTDIR}/nuttx/boards/*/*/${board_config/[:|\/]//configs/} 2> /dev/null)
-      [ $? -ne 0 ] && usage
-    else
-      config_dir=${ROOTDIR}/${board_config}
-    fi
-    echo "config_dir=\"${config_dir}\"" >> ${config}
-  fi
-}
-
-function build()
-{
-  # 编译 nuttx
-  echo "Build ${config_dir}/defconfig command line:"
-  echo "  make -C ${NUTTXDIR} ${VERBOSE} -j${thread} $@"
-  echo "  make -C ${NUTTXDIR} savedefconfig"
-
-  if ! ${TOOLSDIR}/configure.sh -e ${config_dir}; then
-    usage
-    exit 1
-  fi
-
-  ${bear_cmd} make -C ${NUTTXDIR} ${VERBOSE} -j${thread} $@
-  if [ ! $? ]; then
-    echo "Error: ############# build ${board_config} fail ##############"
+  if ! ${BEAR} make -C ${NUTTXDIR} ${@:2} -j; then
+    echo "Error: ############# build ${1} fail ##############"
     exit 2
   fi
 
-  # 保存 defconfig
-  make -C ${NUTTXDIR} savedefconfig
-  if [ ! $? ]; then
-    echo "Error: ############# save ${board_config} fail ##############"
-    exit 3
+  if [ "${2}" == "distclean" ]; then
+    rm -rf $ROOTDIR/compile_commands.json
+    return;
   fi
 
-  # 复制 defconfig
-  cp ${NUTTXDIR}/defconfig ${config_dir}
+  make -C ${NUTTXDIR} savedefconfig
+  if [ ! -d $1 ]; then
+    cp ${NUTTXDIR}/defconfig ${ROOTDIR}/nuttx/boards/*/*/${1/[:|\/]//configs/}
+  else
+    cp ${NUTTXDIR}/defconfig $1
+  fi
 }
 
-function copy()
-{
-  mkdir -p ${ROOTDIR}/bin
-  while read line
-  do
-    echo cp -p ${NUTTXDIR}/${line} ${ROOTDIR}/bin
-    cp -p ${NUTTXDIR}/${line} ${ROOTDIR}/bin
-  done < ${NUTTXDIR}/nuttx.manifest
-}
-
-function usage()
-{
-  echo "############## Usage ##############"
+if [ $# == 0 ]; then
   echo "Usage: $0 <board-name>:<config-name> [make options]"
+  echo "       $0 <config-path> [make options]"
   exit 1
-}
+fi
 
-env_setup $@
-build
-copy
+board_config=$1
+shift
+
+if [ -d ${ROOTDIR}/${board_config} ]; then
+  build_board ${ROOTDIR}/${board_config} $*
+else
+  build_board ${board_config} $*
+fi
+
