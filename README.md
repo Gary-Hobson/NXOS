@@ -9,6 +9,17 @@ git clone --recursive git@github.com:Gary-Hobson/NXOS.git
 
 # 使用指南
 
+```sh
+# 安装依赖
+sudo apt update
+sudo apt install -y \
+bison flex gettext texinfo libncurses5-dev libncursesw5-dev xxd \
+gperf automake libtool pkg-config build-essential gperf genromfs \
+libgmp-dev libmpc-dev libmpfr-dev libisl-dev binutils-dev libelf-dev \
+libexpat-dev gcc-multilib g++-multilib picocom u-boot-tools util-linux \
+kconfig-frontends gcc-arm-none-eabi binutils-arm-none-eabi zlib1g-dev
+```
+
 ```
 # 编译
 ./nx.sh sim:minibasic
