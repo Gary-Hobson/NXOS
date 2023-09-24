@@ -1,6 +1,5 @@
 .vscode
-bin
+.cache
 
-build.ini
-build.log
 tags
+compile_commands.json
