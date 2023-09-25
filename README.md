@@ -2,6 +2,11 @@
 
 NuttX 学习和源码分析笔记
 
+# 下载代码
+```
+git clone --recursive git@github.com:Gary-Hobson/NXOS.git
+```
+
 # 使用指南
 
 ```
