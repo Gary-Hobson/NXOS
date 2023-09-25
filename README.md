@@ -8,8 +8,8 @@ git clone --recursive git@github.com:Gary-Hobson/NXOS.git
 
 # 使用指南
 
+**安装依赖**
 ```sh
-# 安装依赖
 sudo apt update
 sudo apt install -y \
 bison flex gettext texinfo libncurses5-dev libncursesw5-dev xxd \
@@ -19,12 +19,12 @@ libexpat-dev gcc-multilib g++-multilib picocom u-boot-tools util-linux \
 kconfig-frontends gcc-arm-none-eabi binutils-arm-none-eabi zlib1g-dev
 ```
 
-```
-# 编译
-./nx.sh sim:minibasic
+**编译运行**
+```sh
+./nx.sh boards/sim/configs/hello
 
-# 运行 sim
-./bin/nuttx
+# 运行
+./nuttx/nuttx
 ```
 
 ## commit specification
