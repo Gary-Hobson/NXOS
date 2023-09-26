@@ -1,5 +1,5 @@
 /****************************************************************************
- * vendor/sim/boards/miwear/include/board.h
+ * boards/sim/include/board.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __CONFIGS_MIWEAR_INCLUDE_BOARD_H
-#define __CONFIGS_MIWEAR_INCLUDE_BOARD_H
+#ifndef __CONFIGS_SIM_INCLUDE_BOARD_H
+#define __CONFIGS_SIM_INCLUDE_BOARD_H
 
 /****************************************************************************
  * Included Files
@@ -56,4 +56,4 @@ extern "C"
 #endif
 #endif
 
-#endif /* __CONFIGS_MIWEAR_INCLUDE_BOARD_H */
+#endif /* __CONFIGS_SIM_INCLUDE_BOARD_H */

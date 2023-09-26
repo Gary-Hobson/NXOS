@@ -1,5 +1,5 @@
 /****************************************************************************
- * vendor/sim/boards/miwear/scripts/gnu-elf.ld
+ * boards/sim/scripts/gnu-elf.ld
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with

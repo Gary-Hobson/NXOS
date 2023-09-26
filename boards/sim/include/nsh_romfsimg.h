@@ -1,5 +1,5 @@
 /****************************************************************************
- * vendor/sim/boards/miwear/include/nsh_romfsimg.h
+ * boards/sim/include/nsh_romfsimg.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __CONFIGS_MIWEAR_INCLUDE_NSH_ROMFSIMG_H
-#define __CONFIGS_MIWEAR_INCLUDE_NSH_ROMFSIMG_H
+#ifndef __CONFIGS_SIM_INCLUDE_NSH_ROMFSIMG_H
+#define __CONFIGS_SIM_INCLUDE_NSH_ROMFSIMG_H
 extern const unsigned char romfs_img[];
 extern const unsigned int romfs_img_len;
 #endif

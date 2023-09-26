@@ -1,5 +1,5 @@
 ############################################################################
-# vendor/sim/boards/miwear/src/Makefile
+# boards/sim/src/Makefile
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with

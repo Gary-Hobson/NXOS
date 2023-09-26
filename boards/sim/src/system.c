@@ -1,5 +1,5 @@
 /****************************************************************************
- * vendor/sim/boards/miwear/src/ap.c
+ * boards/sim/src/system.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
