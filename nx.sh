@@ -18,7 +18,12 @@ ROOTDIR=$(realpath $(dirname $(readlink -f ${0})))
 NUTTXDIR=${ROOTDIR}/nuttx
 TOOLSDIR=${NUTTXDIR}/tools
 
-BEAR="bear --append "
+bear_version=`bear --version 2>&1 | awk -F '[ .]' '/bear/{print $2}'`
+if [ "$bear_version" == "3" ]; then
+	BEAR="bear --append --"
+else
+	BEAR="bear --append "
+fi
 
 function build_board()
 {
