@@ -125,7 +125,7 @@ static int sim_bringup(void)
 
 #if !defined(CONFIG_DISABLE_MOUNTPOINT)
   ramdiskstart = (uint8_t *)kmm_malloc(512 * 2048);
-  ret = ramdisk_register(1, ramdiskstart, 2048, 512,
+  ret = ramdisk_register(0, ramdiskstart, 2048, 512,
                          RDFLAG_WRENABLED | RDFLAG_FUNLINK);
   if (ret < 0)
     {
