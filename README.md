@@ -1,7 +1,9 @@
 # NXOS
+
 一个用于简化基于 NuttX 的应用开发的仓库，将常用仓库以 git submodules 的方式进行整合。
 
 # 下载代码
+
 ```
 git clone --recursive git@github.com:Gary-Hobson/NXOS.git
 ```
@@ -9,18 +11,25 @@ git clone --recursive git@github.com:Gary-Hobson/NXOS.git
 # 使用指南
 
 **安装依赖**
+
 ```sh
 sudo apt update
 sudo apt install -y \
-bison flex gettext texinfo libncurses5-dev libncursesw5-dev xxd \
-gperf automake libtool pkg-config build-essential gperf genromfs \
+curl bison flex gettext texinfo libncurses5-dev libncursesw5-dev xxd \
+gperf automake libtool pkg-config build-essential genromfs libx11-dev\
 libgmp-dev libmpc-dev libmpfr-dev libisl-dev binutils-dev libelf-dev \
 libexpat-dev gcc-multilib g++-multilib picocom u-boot-tools util-linux \
 kconfig-frontends gcc-arm-none-eabi binutils-arm-none-eabi zlib1g-dev
+pip install pyelftools cxxfilt
 ```
 
 **编译运行**
+
 ```sh
+# 编译命令语法
+./nx.sh 配置文件路径 <Makefile 参数> <V=1, 查看详细编译命令>
+
+# 编译
 ./nx.sh boards/sim/configs/hello
 
 # 运行
@@ -28,13 +37,13 @@ kconfig-frontends gcc-arm-none-eabi binutils-arm-none-eabi zlib1g-dev
 ```
 
 **NSH 使用**
-在 nuttx 启动后会出现一个 Shell，它支持基本的命令，nsh 中输入 ```help``` 查看支持的所有命令。
+在 nuttx 启动后会出现一个 Shell，它支持基本的命令，nsh 中输入 `help` 查看支持的所有命令。
 
-* help: 查看支持的所有命令行命令，其中 ```Builtin Apps``` 为可执行的 task，例如 ```hello``` 为一个独立的 task 可以运行，可以理解为一个进程。
-* ps: nsh 内置命令，查看正在运行的线程信息
-* ls: nsh 内置命令，查看文件系统中的文件
-* hello: 进程，运行后会执行 apps/examples/hello/hello_main.c 的代码
-* poweroff: 退出系统
+- help: 查看支持的所有命令行命令，其中 `Builtin Apps` 为可执行的 task，例如 `hello` 为一个独立的 task 可以运行，可以理解为一个进程。
+- ps: nsh 内置命令，查看正在运行的线程信息
+- ls: nsh 内置命令，查看文件系统中的文件
+- hello: 进程，运行后会执行 apps/examples/hello/hello_main.c 的代码
+- poweroff: 退出系统
 
 ```sh
 NuttShell (NSH)
