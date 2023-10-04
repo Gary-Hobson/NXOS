@@ -1,0 +1,20 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config LIB_SQLITE
+	tristate "SQLITE library"
+	default y
+
+if LIB_SQLITE
+
+config TOOLS_SQLITE
+	bool "SQLITE cmd line tool"
+	default n
+
+config TOOLS_SQLITE_STACKSIZE
+	int "SQLITE3 stack size"
+	default 16384
+
+endif
