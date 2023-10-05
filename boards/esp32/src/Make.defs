@@ -1,5 +1,5 @@
 ############################################################################
-# boards/esp32/scripts/Make.defs
+# boards/sim/src/Makefile
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -18,8 +18,7 @@
 #
 ############################################################################
 
-include $(TOPDIR)/.config
-include $(TOPDIR)/tools/Config.mk
-include $(TOPDIR)/boards/xtensa/esp32/esp32-devkitc/scripts/Make.defs
+include $(TOPDIR)/Make.defs
 
+RCSRCS = board/etc/init.d/rcS
 
