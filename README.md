@@ -31,7 +31,12 @@ pip install pyelftools cxxfilt
 
 ```sh
 # 编译命令语法
-./nx.sh 配置文件路径 <Makefile 参数> <V=1, 查看详细编译命令>
+./nx.sh 配置文件路径 <Makefile 参数>
+Makefile 参数:
+    V=1: 查看详细编译命令
+    distclean: 清理配置及编译缓存
+    clean: 清理编译缓存
+    menuconfig: 配置菜单
 
 # 编译
 ./nx.sh boards/sim/configs/hello
