@@ -5,7 +5,11 @@
 # 下载代码
 
 ```
+# 默认分支 
 git clone --recursive git@github.com:Gary-Hobson/NXOS.git
+
+# 主线开发分支,使用 apache 主线代码,向社区提交代码时使用
+git clone --recursive -dev git@github.com:Gary-Hobson/NXOS.git
 ```
 
 # 使用指南
