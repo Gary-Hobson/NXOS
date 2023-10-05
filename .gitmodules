@@ -1,6 +1,6 @@
 [submodule "nuttx"]
 	path = nuttx
-	url = git@github.com:Gary-Hobson/NXOS-nuttx.git
+	url = https://github.com/Gary-Hobson/NXOS-nuttx.git
 [submodule "apps"]
 	path = apps
-	url = git@github.com:Gary-Hobson/NXOS-apps.git
+	url = https://github.com/Gary-Hobson/NXOS-apps.git
