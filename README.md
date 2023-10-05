@@ -6,10 +6,10 @@
 
 ```
 # 默认分支 
-git clone --recursive git@github.com:Gary-Hobson/NXOS.git
+git clone --recursiv https://github.com/Gary-Hobson/NXOS.git
 
 # 主线开发分支,使用 apache 主线代码,向社区提交代码时使用
-git clone --recursive -dev git@github.com:Gary-Hobson/NXOS.git
+git clone --recursive -dev https://github.com/Gary-Hobson/NXOS.git
 ```
 
 # 使用指南
@@ -17,13 +17,20 @@ git clone --recursive -dev git@github.com:Gary-Hobson/NXOS.git
 **安装依赖**
 
 ```sh
+# 将 apt 和 pip 换到清华源, 以提高下载速度
+sed -i'.bak' 's,/[a-z]*.ubuntu.com,/mirrors.tuna.tsinghua.edu.cn,' /etc/apt/sources.list
+python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
+python -m pip install --upgrade pip
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
 sudo apt update
 sudo apt install -y \
 curl bison flex gettext texinfo libncurses5-dev libncursesw5-dev xxd \
-gperf automake libtool pkg-config build-essential genromfs libx11-dev\
+gperf automake libtool pkg-config build-essential genromfs libx11-dev \
 libgmp-dev libmpc-dev libmpfr-dev libisl-dev binutils-dev libelf-dev \
 libexpat-dev gcc-multilib g++-multilib picocom u-boot-tools util-linux \
-kconfig-frontends gcc-arm-none-eabi binutils-arm-none-eabi zlib1g-dev
+kconfig-frontends gcc-arm-none-eabi binutils-arm-none-eabi zlib1g-dev \
+ccache bear minicom
 pip install pyelftools cxxfilt
 ```
 
