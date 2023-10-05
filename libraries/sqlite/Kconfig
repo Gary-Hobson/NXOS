@@ -5,7 +5,7 @@
 
 config LIB_SQLITE
 	tristate "SQLITE library"
-	default y
+	default n
 
 if LIB_SQLITE
 
