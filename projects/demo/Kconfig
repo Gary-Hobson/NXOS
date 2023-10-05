@@ -7,3 +7,10 @@ config PROJECT_DEMO
 	tristate "Demo project"
 	default y
 
+if PROJECT_DEMO
+
+config PROJECT_DEMO_STACKSIZE
+	int "Demo stack size"
+	default DEFAULT_TASK_STACKSIZE
+
+endif
