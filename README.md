@@ -23,6 +23,7 @@ python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
 python -m pip install --upgrade pip
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
+# 基础编译环境安装
 sudo apt update
 sudo apt install -y \
 curl bison flex gettext texinfo libncurses5-dev libncursesw5-dev xxd \
@@ -32,6 +33,15 @@ libexpat-dev gcc-multilib g++-multilib picocom u-boot-tools util-linux \
 kconfig-frontends gcc-arm-none-eabi binutils-arm-none-eabi zlib1g-dev \
 ccache bear minicom
 pip install pyelftools cxxfilt
+
+# ESP32 环境安装
+pip install esptool
+mkdir -p ~/.toolchain;cd ~/.toolchain
+wget https://github.com/espressif/crosstool-NG/releases/download/esp-12.2.0_20230208/xtensa-esp32-elf-12.2.0_20230208-x86_64-Linux-gnu.tar.xz
+tar -xf ./xtensa-esp32-elf-12.2.0_20230208-x86_64-Linux-gnu.tar.xz
+rm xtensa-esp32-elf-12.2.0_20230208-x86_64-Linux-gnu.tar.xz
+echo "export PATH=\"\$HOME/.toolchain/xtensa-esp32-elf/bin:\$PATH\"" >> ~/.profile
+source ~/.profile
 ```
 
 **编译运行**
