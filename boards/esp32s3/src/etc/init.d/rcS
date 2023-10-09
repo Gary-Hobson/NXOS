@@ -1,0 +1,26 @@
+#include <nuttx/config.h>
+
+set +e
+
+#ifndef CONFIG_NSH_DISABLE_UNAME
+uname -a > /dev/log
+#endif
+
+#ifdef CONFIG_FS_PROCFS
+#ifdef CONFIG_NSH_PROC_MOUNTPOINT
+mount -t procfs CONFIG_NSH_PROC_MOUNTPOINT
+#endif
+#endif
+
+#ifdef CONFIG_FS_BINFS
+mount -t binfs /bin
+#endif
+
+#ifdef CONFIG_FS_TMPFS
+mount -t tmpfs /tmp
+#endif
+
+#ifdef CONFIG_SIM_HOSTFS
+mount -t hostfs -o fs=.       /data
+#endif
+
